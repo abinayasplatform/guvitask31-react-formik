@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
+
 function DashboardAuthor() {
 
   const [authorData, setAuthorData] = useState([])
@@ -20,7 +21,7 @@ function DashboardAuthor() {
   const getAuthorData = async() => {
     try {
       let res = await ApiService.get('/formik')
-      // console.log(res);
+      
       if(res.status === 200){
         setAuthorData(res.data)
         toast.success("Author's Data Fetched successfully")
@@ -33,7 +34,7 @@ function DashboardAuthor() {
   const handleDelete = async(id) => {
     try {
       let res = await ApiService.delete(`/formik/${id}`)
-      // console.log(res);
+      
       if(res.status === 200){
         getAuthorData();
         toast.success("Author Deleted successfully")
@@ -46,14 +47,12 @@ function DashboardAuthor() {
   return <>
     <Topbar/>
     <Container>
-    <Container className="d-flex justify-content-start" >
-      <Button className='mt-3' variant='primary' onClick={()=>navigate(`/add-author`)}>Add Author</Button>
-    </Container>
+    
       <Row className='d-flex justify-content-start flex-row'>
       <div className='mt-3'>
               <Table striped bordered hover>
                 <thead>
-                  <tr>
+                  <tr class="table-danger">
                     <th>S.No</th>
                     <th>Author's Name</th>
                     <th>Author's DOB</th>
@@ -61,7 +60,7 @@ function DashboardAuthor() {
                     <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-primary">
                   {
                     authorData.map((e,i)=>{
                       return <>
@@ -71,7 +70,7 @@ function DashboardAuthor() {
                           <td>{e.dob}</td>
                           <td><div style={{width:"300px", overflow:"hidden", whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{e.bio}</div></td>
                           <td>
-                            <Button variant='primary' onClick={()=>navigate(`/edit-author/${e.id}`)}>Edit</Button>
+                            <Button variant='warning' onClick={()=>navigate(`/edit-author/${e.id}`)}>Edit</Button>
                             &nbsp;
                             <Button variant='danger' onClick={()=>{handleDelete(e.id)}}>Delete</Button>
                           </td>

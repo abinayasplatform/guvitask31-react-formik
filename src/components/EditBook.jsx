@@ -31,7 +31,7 @@ function EditBook() {
       author : Yup.string().max(20,'Author cannot exceed 20 characters')
                            .min(4,"Author cannot be shorter than 4 characters")
                            .required("Author cannot be empty"),
-      isbnNum : Yup.string().matches(/^\d{17}$/,' Enter a valid 17 digit ISBN Number')
+      isbnNum : Yup.string().matches(/^\d{5}$/,' Enter a valid 5 digit ISBN Number')
                             .required("ISBN Number cannot be empty"),
       description : Yup.string().max(250,'Description cannot exceed 250 characters')
                                 .min(50,"Description cannot be shorter than 50 characters")
@@ -101,7 +101,7 @@ function EditBook() {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label><b>ISBN Number</b></Form.Label>
-              <Form.Control type="text" id="isbnNum" name="isbnNum" onChange={formik.handleChange} value={formik.values.isbnNum} onBlur={formik.handleBlur} placeholder="Enter ISBN Number"/>
+              <Form.Control type="text" id="isbnNum" name="isbnNum" onChange={formik.handleChange} value={formik.values.isbnNum} onBlur={formik.handleBlur} placeholder="Enter ISBN Number(5 digit)"/>
               {formik.touched.isbnNum && formik.errors.isbnNum ? (<div style={{color: 'red'}}>{formik.errors.isbnNum}</div>) : null}
             </Form.Group>
           </Col>

@@ -42,17 +42,13 @@ function DashboardBook() {
   return (
     <>
       <Topbar /><br/>
-      <Container>
-        <Button className='mt-3' variant='primary' onClick={() => navigate(`/add-book`)}>
-          Add Book
-        </Button>
-      </Container><br/>
-      <Container>  
+     
+      <Container >  
       <div>
       <Table striped bordered hover>
         <thead>
-          <tr>
-            <th>#</th>
+          <tr class="table-danger">
+            <th>S.no</th>
             <th>Title</th>
             <th>Author</th>
             <th>ISBN Number</th>
@@ -61,7 +57,7 @@ function DashboardBook() {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-primary">
           {
             bookData.map((e,i)=>{
               return <tr key={i}>
@@ -76,7 +72,7 @@ function DashboardBook() {
                 </td>
                 <td>{e.date}</td>
                 <td>
-                  <Button variant="info" onClick={()=>navigate(`/edit-book/${e.id}`)}>Edit</Button>
+                  <Button variant="warning" onClick={()=>navigate(`/edit-book/${e.id}`)}>Edit</Button>
                   &nbsp;
                   <Button variant="danger" onClick={()=>handleDelete(e.id)}>Delete</Button>
                 </td>

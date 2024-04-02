@@ -24,22 +24,28 @@ function EditAuthor() {
   let formik = useFormik({
     initialValues:initialValues,
     validationSchema: Yup.object({
+
+
       name : Yup.string().max(20,'Title cannot exceed 20 characters')
                           .min(5,"Title cannot be shorter than 5 characters")
                           .required("Title cannot be empty"),
+
+
       bio : Yup.string().max(250,'Bio cannot exceed 250 characters')
                                 .min(50,"Bio cannot be shorter than 50 characters")
                                 .required("Bio cannot be empty"),
+
+
       dob : Yup.string().required("Date cannot be empty").max(new Date(), 'Date of birth cannot be in the future')
 
     }) ,
     enableReinitialize: true,
     onSubmit : async(values) => {
-      // console.log(values);
+      
       let {id} = params
       values.id = id
       try {
-        // console.log(values);
+        
         let res = await ApiService.put(`/formik/${id}`,values)
         if(res.status === 200){
           navigate('/dashboard-author')
@@ -79,21 +85,21 @@ function EditAuthor() {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" id="name" name="name" onChange={formik.handleChange} value={formik.values.name} onBlur={formik.handleBlur} placeholder="Enter Author Name"/>
+              <Form.Control type="text" id="name" name="name" onChange={formik.handleChange} value={formik.values.name} onBlur={formik.handleBlur} placeholder="Enter Author's Name"/>
               {formik.touched.name && formik.errors.name ? (<div style={{color: 'red'}}>{formik.errors.name}</div>) : null}
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Bio</Form.Label>
-              <Form.Control as="textarea" id="bio" name="bio" onChange={formik.handleChange} value={formik.values.bio} onBlur={formik.handleBlur} placeholder="Enter Author Bio"/>
+              <Form.Control as="textarea" id="bio" name="bio" onChange={formik.handleChange} value={formik.values.bio} onBlur={formik.handleBlur} placeholder="Enter Author's Bio"/>
               {formik.touched.bio && formik.errors.bio ? (<div style={{color: 'red'}}>{formik.errors.bio}</div>) : null}
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type='date' id="date" name="dob" onChange={formik.handleChange} value={formik.values.dob} onBlur={formik.handleBlur} placeholder="Enter Date Of Birth"/>
+              <Form.Control type='date' id="date" name="dob" onChange={formik.handleChange} value={formik.values.dob} onBlur={formik.handleBlur} placeholder="Enter Author's DOB"/>
               {formik.touched.date && formik.errors.date ? (<div style={{color: 'red'}}>{formik.errors.date}</div>) : null}
             </Form.Group>
           </Col>

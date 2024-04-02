@@ -22,21 +22,26 @@ function AddBook() {
       date:''
     },
     validationSchema: Yup.object({
+      // title of the book
       title : Yup.string().max(20,'Title cannot exceed 20 characters')
                           .min(3,"Title cannot be shorter than 3 characters")
                           .required("Title cannot be empty"),
+      // Author of the book
       author : Yup.string().max(20,'Author cannot exceed 20 characters')
                            .min(3,"Author cannot be shorter than 3 characters")
                            .required("Author cannot be empty"),
-      isbnNum : Yup.string().matches(/^\d{17}$/,' Enter a valid 17 digit ISBN Number')
+      // ISBN number of the book
+      isbnNum : Yup.string().matches(/^\d{5}$/,' Enter a valid 5 digit ISBN Number')
                             .required("ISBN Number cannot be empty"),
+      // Description of the book                      
       description : Yup.string().max(200,'Description cannot exceed 200 characters')
                                 .min(50,"Description cannot be shorter than 50 characters")
                                 .required("Description cannot be empty"),
+      // Date of the book published                          
       date : Yup.string().required("Date cannot be empty")
     }) ,
     onSubmit : async(values) => {
-      // console.log(values);
+      
       try {
         let res = await ApiService.post('/formik',values)
         if(res.status === 201){
@@ -71,7 +76,7 @@ function AddBook() {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label><b>ISBN Number</b></Form.Label>
-              <Form.Control type="text" id="isbnNum" name="isbnNum" onChange={formik.handleChange} value={formik.values.isbnNum} onBlur={formik.handleBlur} placeholder="Enter ISBN Number"/>
+              <Form.Control type="text" id="isbnNum" name="isbnNum" onChange={formik.handleChange} value={formik.values.isbnNum} onBlur={formik.handleBlur} placeholder="Enter ISBN Number(5 digit)"/>
               {formik.touched.isbnNum && formik.errors.isbnNum ? (<div style={{color: 'red'}}>{formik.errors.isbnNum}</div>) : null}
             </Form.Group>
           </Col>
@@ -84,7 +89,7 @@ function AddBook() {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label><b>Published at</b></Form.Label>
+              <Form.Label><b>Book Published at</b></Form.Label>
               <Form.Control type='date' id="date" name="date" onChange={formik.handleChange} value={formik.values.date} onBlur={formik.handleBlur} placeholder="Enter published date"/>
               {formik.touched.date && formik.errors.date ? (<div style={{color: 'red'}}>{formik.errors.date}</div>) : null}
             </Form.Group>
