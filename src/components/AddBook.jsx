@@ -46,10 +46,10 @@ function AddBook() {
         let res = await ApiService.post('/formik',values)
         if(res.status === 201){
           navigate('/')
-          alert("Book Added Successfully")
+          toast.success("Book Added Successfully")
         }
       } catch (error) {
-        alert("Failed to create a book")
+        toast.error("Failed to create a book")
       }
     }
   })

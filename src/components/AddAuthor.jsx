@@ -41,10 +41,10 @@ function AddAuthor() {
         let res = await ApiService.post('/formik',values)
         if(res.status === 201){
           navigate('/dashboard-author')
-          alert("Author added Successfully")
+          toast.success("Author added Successfully")
         }
       } catch (error) {
-        alert("Failed to create a Author")
+        toast.error("Failed to create a Author")
       }
     }
   })
