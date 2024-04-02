@@ -1,9 +1,9 @@
 import React,  { useState,useEffect }  from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Topbar from '../common/Topbar'
+import Topbar from '../components/Topbar'
 import { useNavigate } from 'react-router-dom';
-import ApiService from '../../utils/ApiService';
+import ApiService from '../utils/ApiService';
 import Button from 'react-bootstrap/Button';
 import { Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
